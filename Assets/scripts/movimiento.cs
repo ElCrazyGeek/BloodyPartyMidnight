@@ -1,11 +1,5 @@
-//using System.Numerics;
-//using Unity.VisualScripting;
-//using System.Numerics;
-using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-//using UnityEngine.InputSystem;
+
 
 public class movimiento : MonoBehaviour
 {
@@ -30,8 +24,7 @@ public class movimiento : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         playertrans = GetComponent<Transform>();
-
-   //    playercolor = GetComponent<SpriteRenderer>();
+        SR = GetComponent<SpriteRenderer>();
     }
 
     
@@ -50,13 +43,16 @@ public class movimiento : MonoBehaviour
         {
             player.gravityScale = 1f;
             playertrans.localScale = new Vector3(0.3f, 0.2f,1);
+            SR.color = playercolor;
+
        //     SpriteRenderer 
 
         }
 
         movedir = Input.GetAxisRaw("Horizontal") * speed; 
-             movever = Input.GetAxisRaw("Vertical") * speed;
+        movever = Input.GetAxisRaw("Vertical") * speed;
         player.linearVelocity = new Vector2(movedir, movever);
+
 
         //guardar la posicion cuando dejes de presiona F
         //cambiar de color
