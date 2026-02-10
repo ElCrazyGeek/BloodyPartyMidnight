@@ -16,7 +16,14 @@ public class Recolectordedinero : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            DineroManager.instance.dinero += recompensa;
+            Destroy(gameObject);
+        }
+
         
     }
+    
 
 }
