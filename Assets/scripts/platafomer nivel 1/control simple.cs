@@ -12,6 +12,9 @@ public class Movimiento : MonoBehaviour
     public PlayerInput input;
     private Vector2 mov;
     private Vector2 dir;
+    public float jumpforce;
+
+    public bool canjump = true;
 
     public int speed = 2;
     void Start()
@@ -24,10 +27,24 @@ public class Movimiento : MonoBehaviour
     {
         dir = input.actions["Movement"].ReadValue<Vector2>();
         mov.x = dir.x * speed;
-        mov.y = dir.y * speed;
+        mov.y = dir.y * jumpforce;
 
-        player.linearVelocity = new Vector2(mov.x, player.linearVelocity.y); 
+        player.linearVelocity = new Vector2(mov.x, player.linearVelocity.y);
 
-
+        if (input.actions["jump"].WasPressedThisFrame() && canjump)
+        {
+            player.linearVelocity = new Vector2(player.linearVelocity.x,jumpforce);
+            canjump = false;
+        }
+       
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+         if (collision.gameObject.CompareTag("suelo"))
+        {
+            canjump = true;
+        }
+    }
+
 }
+

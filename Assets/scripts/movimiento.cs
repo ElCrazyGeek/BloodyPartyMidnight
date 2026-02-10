@@ -6,6 +6,7 @@ public class movimiento : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
        private Rigidbody2D player;
+       
        private Transform playertrans;
        public Color playercolor;
        public SpriteRenderer SR;
