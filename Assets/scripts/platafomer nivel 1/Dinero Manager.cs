@@ -19,7 +19,16 @@ public class DineroManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
+    }
+    
+    public void AddMoney()
+    {
+        dinero += 6;
+    }
+    public void LessMoney()
+    {
+        dinero -= 6;
     }
    
 }
