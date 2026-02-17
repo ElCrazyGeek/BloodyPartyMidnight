@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 2359158}
   - component: {fileID: 2359161}
   - component: {fileID: 2359160}
+  - component: {fileID: 2359162}
   m_Layer: 0
   m_Name: Enemigo
   m_TagString: Untagged
@@ -206,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 2359157}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0.33, y: 3.343, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1.601, y: 1.601, z: 1.601}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,6 +286,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2359162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2359157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40012504e28cc5640a7139c2c234f7df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::movimientoenemigo
+  RBEnemigo: {fileID: 2359161}
+  bajar: 1
+  dir: 1
+  movx: 1
+  movy: 0
+  speed: 2
+  vida: 1
+  LimDer: 8.5
+  LimIzq: -8.5
 --- !u!1 &98532512
 GameObject:
   m_ObjectHideFlags: 0
