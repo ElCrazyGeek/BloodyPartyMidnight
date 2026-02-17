@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "player",
+    "maps": [
+        {
+            "name": "Player 1",
+            "id": "76ffbb50-f0f4-4f21-95fa-5b8cd748e505",
+            "actions": [
+                {
+                    "name": "movimiento",
+                    "type": "Button",
+                    "id": "0d34a6cc-f3dd-43e8-8a04-3fa7149b6710",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fd981ea8-581e-4bd7-b425-9aa6227e4a74",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "movimiento",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "786311bc-093f-4ad7-adf9-bae3cecab6b6",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "movimiento",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
