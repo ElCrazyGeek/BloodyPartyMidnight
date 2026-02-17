@@ -4,7 +4,7 @@ public class movimientoenemigo : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Rigidbody2D RBEnemigo;
-    public float speed = 2f;
+    public float speed;
     public float movy = 1f;
     public float movx = 1f;
 
@@ -24,7 +24,7 @@ public class movimientoenemigo : MonoBehaviour
 
     void movimiento()
     {
-        RBEnemigo.linearVelocity = new Vector2(movx * 2, RBEnemigo.linearVelocity.y);
+        RBEnemigo.linearVelocity = new Vector2(movx * speed, RBEnemigo.linearVelocity.y);
 
         if (RBEnemigo.transform.position.x >= LimDer && movx > 0|| RBEnemigo.transform.position.x <= LimIzq && movx < 0)
         {
