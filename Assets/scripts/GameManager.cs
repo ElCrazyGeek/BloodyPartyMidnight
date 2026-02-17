@@ -1,6 +1,6 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,7 +21,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(puntos >= 8)
+        {
+             SceneManager.LoadScene("Examen_Primer_parcial_Mazanas");
+        }
     }
     public void  subirPuntos()
     {

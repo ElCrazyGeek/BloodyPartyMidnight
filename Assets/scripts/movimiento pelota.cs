@@ -1,6 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class movimientopelota : MonoBehaviour
 {
@@ -11,16 +11,14 @@ public class movimientopelota : MonoBehaviour
     public Vector2 mov;
     public float speed;
     public float trowforce;
-    public Vector2 tiro;
     public bool cantrow;
-
     public SpriteRenderer Play;
-
     public Color normal;
-
     public Color Rebote;
     public Color Anotacion;
     public Color Autoanotacion;
+    public float time;
+    public Time tiempo;
 
     void Start()
     {
@@ -41,7 +39,11 @@ public class movimientopelota : MonoBehaviour
        Pelota.linearVelocity = new Vector2(Pelota.linearVelocity.x, trowforce);
        cantrow = false;
        }
+
   
+      
+       aciones();
+
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -71,4 +73,20 @@ public class movimientopelota : MonoBehaviour
        
     }
 
-}
+    void aciones()
+    {
+        if(GameManager.instance.vida == 0)
+        {
+            speed = 0;
+            trowforce = 0;
+            time += Time.deltaTime;
+        }
+         if(time >= 5)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            time= 0;
+            
+        } 
+    }
+
+ }

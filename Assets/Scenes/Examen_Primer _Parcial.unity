@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   texto: {fileID: 1876100277}
-  puntos: 0
+  puntos: 7
   vida: 5
 --- !u!4 &568119808
 Transform:
@@ -1149,13 +1149,13 @@ MonoBehaviour:
   mov: {x: 0, y: 0}
   speed: 20
   trowforce: 25
-  tiro: {x: 0, y: 0}
   cantrow: 0
   Play: {fileID: 1864229062}
   normal: {r: 1, g: 1, b: 1, a: 0}
   Rebote: {r: 1, g: 0, b: 0, a: 1}
   Anotacion: {r: 0, g: 1, b: 0, a: 1}
   Autoanotacion: {r: 0.9150943, g: 0.52782565, b: 0, a: 1}
+  time: 0
 --- !u!114 &1864229065
 MonoBehaviour:
   m_ObjectHideFlags: 0
