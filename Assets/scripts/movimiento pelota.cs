@@ -19,6 +19,10 @@ public class movimientopelota : MonoBehaviour
     public Color Autoanotacion;
     public float time;
     public Time tiempo;
+    public bool Vivo = true;
+    public bool Muerto = false;
+
+    public float tiempovida;
 
     void Start()
     {
@@ -34,24 +38,29 @@ public class movimientopelota : MonoBehaviour
 
        Pelota.linearVelocity = new Vector2(mov.x, Pelota.linearVelocity.y); 
        
-       if(myinput.actions["Tiro"].WasPressedThisFrame() && cantrow){
+       if(myinput.actions["Tiro"].WasPressedThisFrame()){
 
        Pelota.linearVelocity = new Vector2(Pelota.linearVelocity.x, trowforce);
-       cantrow = false;
        }
+       time += Time.deltaTime;
 
-  
-      
-       aciones();
+       condiciones();
+        aciones();
 
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
+
         if(collision.gameObject.CompareTag("suelo")){
         Play.color = Rebote;
-        cantrow = true;
+
         GameManager.instance.vida--;
+        Pelota.linearVelocity = new Vector2(Pelota.linearVelocity.x, trowforce);
+        if(Vivo == true)
+            {
+                trowforce = 30;
+            } 
         }
         
     }
@@ -67,26 +76,39 @@ public class movimientopelota : MonoBehaviour
 
             }
     }
-
-    public void OnCollisionStay2D(Collision2D collision)
-    {
-       
-    }
-
     void aciones()
     {
         if(GameManager.instance.vida == 0)
         {
+           Vivo = false;
+           time = 0;
             speed = 0;
             trowforce = 0;
             time += Time.deltaTime;
+            Muerto = true;
         }
-         if(time >= 5)
-        {
+        if(Muerto && time >= 3  )
+            {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             time= 0;
+            Vivo = true;
+            Muerto = false; 
             
-        } 
+            }
+    }
+
+    void condiciones()
+    {
+        if(time >= 10)
+        {
+            Pelota.gravityScale = 10;
+            Pelota.mass = 2;
+        }
+        if(time >= 20)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                   time= 0;
+        }
     }
 
  }

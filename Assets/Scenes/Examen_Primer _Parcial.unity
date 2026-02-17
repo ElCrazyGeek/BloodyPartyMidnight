@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   texto: {fileID: 1876100277}
-  puntos: 7
+  puntos: 0
   vida: 5
 --- !u!4 &568119808
 Transform:
@@ -1125,7 +1125,7 @@ Transform:
   m_GameObject: {fileID: 1864229061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -2.61, z: 0}
+  m_LocalPosition: {x: 0.03, y: 4.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1156,6 +1156,8 @@ MonoBehaviour:
   Anotacion: {r: 0, g: 1, b: 0, a: 1}
   Autoanotacion: {r: 0.9150943, g: 0.52782565, b: 0, a: 1}
   time: 0
+  Vivo: 0
+  tiempovida: 0
 --- !u!114 &1864229065
 MonoBehaviour:
   m_ObjectHideFlags: 0
