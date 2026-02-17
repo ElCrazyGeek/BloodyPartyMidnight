@@ -44,24 +44,31 @@ public class movimientopelota : MonoBehaviour
   
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("suelo")){
-          Play.color = Rebote;
-            cantrow = true;
-        }
-        else
-        {
-            Play.color = normal;
+        Play.color = Rebote;
+        cantrow = true;
+        GameManager.instance.vida--;
         }
         
-        if(collision.gameObject.CompareTag("rival")){
-            Play.color = Anotacion; 
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+         if(collision.gameObject.CompareTag("rival")){
+        GameManager.instance.subirPuntos();
+        Play.color = Anotacion; 
             }
         if(collision.gameObject.CompareTag("Propia")){
-            Play.color = Autoanotacion; 
-            }
+        GameManager.instance.bajarPuntos();  
+        Play.color = Autoanotacion; 
 
+            }
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+       
     }
 
 }
