@@ -10,6 +10,10 @@ public class movimientocanasta : MonoBehaviour
     public float speed;
     public PlayerInput Canasta;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void awake()
+    {
+        intance = this;
+    }
     void Start()
     {
         
@@ -26,16 +30,5 @@ public class movimientocanasta : MonoBehaviour
         mov.x = dir.x * speed;
         canasta.linearVelocity = new Vector2(mov.x,canasta.linearVelocity.y);
     }
-   void OnTriggerEnter2D(Collider2D collision)
-    {
-           if (collision.gameObject.CompareTag("Manzana")){
-            ControlManzanas.instance.sumarPuntos();
-            Destroy(collision.gameObject);
-
-        }
-        if(collision.gameObject.CompareTag("Manzana mala")){
-            ControlManzanas.instance.restarPuntos();
-             Destroy(collision.gameObject);
-        }
-    }
+  
 }

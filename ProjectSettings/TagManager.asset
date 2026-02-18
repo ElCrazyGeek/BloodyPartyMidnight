@@ -10,7 +10,8 @@ TagManager:
   - rival
   - Canasta
   - Manzana
-  - Manzana mala
+  - ManzanaMala
+  - Suelo
   layers:
   - Default
   - TransparentFX

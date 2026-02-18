@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6951543004647464018}
   - component: {fileID: 1786275831387995636}
   - component: {fileID: 3917424674646186473}
+  - component: {fileID: -5801176886771500160}
   m_Layer: 0
   m_Name: Manzana Mala
-  m_TagString: Manzana mala
+  m_TagString: ManzanaMala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,3 +157,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-5801176886771500160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7215646818988638831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ec22b839a16248a10c82756fafc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Manzana

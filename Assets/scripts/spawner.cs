@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ public class spawner : MonoBehaviour
     public int Veneno = 0;
     public GameObject Manzana;
     public GameObject ManzanaMala;
+    public int Contador = 0;
+    public float limite = 3;
+    public int pass = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,12 +24,13 @@ public class spawner : MonoBehaviour
     {
         Timer += Time.deltaTime;
         
-        if(Timer >= 3)
+        if(Timer >= limite)
         {
 
             Instantiate(Manzana, transform.position, quaternion.identity);
             Timer = 0;
             Veneno ++;
+            Contador ++;
         }
         
         if(Veneno >= 3)
@@ -34,6 +39,19 @@ public class spawner : MonoBehaviour
             Instantiate(ManzanaMala, transform.position, quaternion.identity);
             Timer = 0;
             Veneno = 0;
+        }
+
+        if(Contador == 6 && pass < 1)
+        {
+            Timer = 0;
+            limite = limite - 0.5f;
+            pass++;
+        }
+            if(Contador == 12 && pass < 2)
+        {
+            Timer = 0;
+            limite = limite - 1f;
+            pass++;
         }
     }
 

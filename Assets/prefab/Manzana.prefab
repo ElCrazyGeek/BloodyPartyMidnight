@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1738884048225014472}
   - component: {fileID: 9033746550817490180}
   - component: {fileID: 2187142746574882412}
+  - component: {fileID: 5010477676915887830}
   m_Layer: 0
   m_Name: Manzana
   m_TagString: Manzana
@@ -156,3 +157,17 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &5010477676915887830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388021918355948106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ec22b839a16248a10c82756fafc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Manzana
+  Mala: 0
+  buena: 1
