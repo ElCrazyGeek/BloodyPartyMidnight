@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class movimientopelota : MonoBehaviour
 {
+    public static movimientopelota instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Rigidbody2D Pelota;
     public PlayerInput myinput;
@@ -23,6 +25,12 @@ public class movimientopelota : MonoBehaviour
     public bool Muerto = false;
 
     public float tiempovida;
+    public bool Multi = false; 
+
+    void Awake()
+{
+    instance = this;
+}
 
     void Start()
     {
@@ -48,6 +56,36 @@ public class movimientopelota : MonoBehaviour
         aciones();
 
     }
+    IEnumerator RutinaColor(Color colorFlash, float dur)
+{
+    Color ColOrg = normal;   // tu default del inspector
+    Play.color = colorFlash;
+    yield return new WaitForSeconds(1.5F);
+    Play.color = ColOrg;
+}
+
+IEnumerator RutinaMuerte()
+{
+    // 1) feedback rojo + congelar físicas
+    Vivo = false;
+    Muerto = true;
+
+    Play.color = Rebote; 
+    Pelota.linearVelocity = Vector2.zero;
+    Pelota.angularVelocity = 0f;
+    Pelota.bodyType = RigidbodyType2D.Static;
+    yield return new WaitForSeconds(2f);
+
+    // 3) apagar sprite (componente de imagen)
+    Play.enabled = false;
+
+    // 4) esperar otros pocos segundos
+    yield return new WaitForSeconds(2f);
+
+    // 5) reiniciar escena
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+}
+
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -59,6 +97,7 @@ public class movimientopelota : MonoBehaviour
         Pelota.linearVelocity = new Vector2(Pelota.linearVelocity.x, trowforce);
         if(Vivo == true)
             {
+                    StartCoroutine(RutinaColor(Rebote, 0.12f));
                 trowforce = 30;
             } 
         }
@@ -68,11 +107,11 @@ public class movimientopelota : MonoBehaviour
     {
          if(collision.gameObject.CompareTag("rival")){
         GameManager.instance.subirPuntos();
-        Play.color = Anotacion; 
+        StartCoroutine(RutinaColor(Anotacion, 0.12f));  
             }
         if(collision.gameObject.CompareTag("Propia")){
-        GameManager.instance.bajarPuntos();  
-        Play.color = Autoanotacion; 
+        GameManager.instance.bajarPuntos();
+        StartCoroutine(RutinaColor(Autoanotacion, 0.12f));  
 
             }
     }
@@ -86,6 +125,7 @@ public class movimientopelota : MonoBehaviour
             trowforce = 0;
             time += Time.deltaTime;
             Muerto = true;
+            StartCoroutine(RutinaMuerte());
         }
         if(Muerto && time >= 3  )
             {
@@ -103,6 +143,7 @@ public class movimientopelota : MonoBehaviour
         {
             Pelota.gravityScale = 10;
             Pelota.mass = 2;
+            Multi = true;
         }
         if(time >= 20)
         {

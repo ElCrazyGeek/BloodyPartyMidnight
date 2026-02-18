@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
     {
         puntos ++;
         texto.text = "Puntos: " + puntos;
+        if(movimientopelota.instance.Multi == true)
+        {
+            puntos += 4;
+        }
     }
 
     public void bajarPuntos()
@@ -42,11 +46,4 @@ public class GameManager : MonoBehaviour
     {
         vida --;
     }
-
-
- /*   void restarVida()
-    {
-        texto.text = "vida: " + vida;
-    }
- */
 }

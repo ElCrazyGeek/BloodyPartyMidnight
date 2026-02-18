@@ -1151,13 +1151,15 @@ MonoBehaviour:
   trowforce: 25
   cantrow: 0
   Play: {fileID: 1864229062}
-  normal: {r: 1, g: 1, b: 1, a: 0}
+  normal: {r: 1, g: 1, b: 1, a: 1}
   Rebote: {r: 1, g: 0, b: 0, a: 1}
   Anotacion: {r: 0, g: 1, b: 0, a: 1}
   Autoanotacion: {r: 0.9150943, g: 0.52782565, b: 0, a: 1}
   time: 0
   Vivo: 0
+  Muerto: 0
   tiempovida: 0
+  Multi: 0
 --- !u!114 &1864229065
 MonoBehaviour:
   m_ObjectHideFlags: 0
