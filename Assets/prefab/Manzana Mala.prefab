@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1388021918355948106
+--- !u!1 &7215646818988638831
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 160427770531080845}
-  - component: {fileID: 1738884048225014472}
-  - component: {fileID: 9033746550817490180}
-  - component: {fileID: 2187142746574882412}
+  - component: {fileID: 2328957699064249337}
+  - component: {fileID: 6951543004647464018}
+  - component: {fileID: 1786275831387995636}
+  - component: {fileID: 3917424674646186473}
   m_Layer: 0
-  m_Name: Manzana
-  m_TagString: Manzana
+  m_Name: Manzana Mala
+  m_TagString: Manzana mala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &160427770531080845
+--- !u!4 &2328957699064249337
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388021918355948106}
+  m_GameObject: {fileID: 7215646818988638831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 2.54, z: 0}
+  m_LocalPosition: {x: 1.01385, y: 0.59061, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1738884048225014472
+--- !u!212 &6951543004647464018
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388021918355948106}
+  m_GameObject: {fileID: 7215646818988638831}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.06132078, b: 0.06132078, a: 1}
+  m_Color: {r: 0.4264151, g: 0.13436095, b: 0.13436095, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,14 +93,14 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!50 &9033746550817490180
+--- !u!50 &1786275831387995636
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388021918355948106}
+  m_GameObject: {fileID: 7215646818988638831}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -120,13 +120,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &2187142746574882412
+--- !u!58 &3917424674646186473
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388021918355948106}
+  m_GameObject: {fileID: 7215646818988638831}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1

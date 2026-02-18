@@ -8,6 +8,9 @@ TagManager:
   - suelo
   - Propia
   - rival
+  - Canasta
+  - Manzana
+  - Manzana mala
   layers:
   - Default
   - TransparentFX

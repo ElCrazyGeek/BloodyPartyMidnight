@@ -58,7 +58,7 @@ public class movimientopelota : MonoBehaviour
     }
     IEnumerator RutinaColor(Color colorFlash, float dur)
 {
-    Color ColOrg = normal;   // tu default del inspector
+    Color ColOrg = normal; 
     Play.color = colorFlash;
     yield return new WaitForSeconds(1.5F);
     Play.color = ColOrg;
@@ -66,7 +66,7 @@ public class movimientopelota : MonoBehaviour
 
 IEnumerator RutinaMuerte()
 {
-    // 1) feedback rojo + congelar físicas
+
     Vivo = false;
     Muerto = true;
 
@@ -75,14 +75,8 @@ IEnumerator RutinaMuerte()
     Pelota.angularVelocity = 0f;
     Pelota.bodyType = RigidbodyType2D.Static;
     yield return new WaitForSeconds(2f);
-
-    // 3) apagar sprite (componente de imagen)
     Play.enabled = false;
-
-    // 4) esperar otros pocos segundos
     yield return new WaitForSeconds(2f);
-
-    // 5) reiniciar escena
     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 }
 
@@ -97,7 +91,7 @@ IEnumerator RutinaMuerte()
         Pelota.linearVelocity = new Vector2(Pelota.linearVelocity.x, trowforce);
         if(Vivo == true)
             {
-                    StartCoroutine(RutinaColor(Rebote, 0.12f));
+                StartCoroutine(RutinaColor(Rebote, 0.12f));
                 trowforce = 30;
             } 
         }

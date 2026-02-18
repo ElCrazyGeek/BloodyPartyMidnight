@@ -542,6 +542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1726269747}
   - component: {fileID: 1726269748}
+  - component: {fileID: 1726269749}
   m_Layer: 0
   m_Name: Intanciador
   m_TagString: Untagged
@@ -577,7 +578,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::spawner
   Timer: 0
+  Veneno: 0
   Manzana: {fileID: 1388021918355948106, guid: cc6a0e0a501ef4849abf8f74fcdd7dce, type: 3}
+  ManzanaMala: {fileID: 7215646818988638831, guid: c38937e02b41916498dea5eb4531f677, type: 3}
+--- !u!114 &1726269749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726269746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd35fb9953ae8794d8515430ebbe4b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlManzanas
 --- !u!1 &1852145020
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +609,7 @@ GameObject:
   - component: {fileID: 1852145027}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Canasta
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -690,7 +705,7 @@ MonoBehaviour:
   canasta: {fileID: 1852145027}
   dir: {x: 0, y: 0}
   mov: {x: 0, y: 0}
-  speed: 0
+  speed: 5
   Canasta: {fileID: 1852145021}
 --- !u!212 &1852145025
 SpriteRenderer:
