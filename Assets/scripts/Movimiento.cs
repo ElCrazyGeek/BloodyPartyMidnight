@@ -2,17 +2,29 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Movimiento : MonoBehaviour
-{
+{  
+    /// <summary>
+    /// aqui cree un header porque esa madre ya estaba creando un pinche desmadre que
+    /// al principio no mas Dios y yo voy a entender y luego solo Dios
+    /// asi que mejor voy a organizar todo de una vez
+    /// </summary>
+    [Header("Movimiento del jugador")]
     public Rigidbody2D Player;
-
     public Vector2 dir;
-
     public Vector2 mov;
-
     public PlayerInput input; 
-
     public float speed;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    /// <summary>
+    /// aqui van ir los valores del arma cuando sean necesarios
+    /// mas que nada solo que el jugador la pueda tomar o no, y lo demas
+    /// mejor se lo voy a dejar a cada arma
+    /// </summary>
+    [Header("Vaiables Arma")]
+    public Arma ArmaJugador;
+    public Arma ArmaRecoletable;
+
+
+
     void Start()
     {
         
@@ -43,7 +55,13 @@ public class Movimiento : MonoBehaviour
     }
    void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (input.actions["Recoger objeto"].WasPressedThisFrame())
+        {
+            if (collision.CompareTag("Arma"))
+            {
+                ArmaRecoletable = collision.GetComponent<Arma>(); 
+            }
+        }
     }
 
 
