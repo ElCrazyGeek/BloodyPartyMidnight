@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 299024872}
   - component: {fileID: 299024871}
   - component: {fileID: 299024870}
+  - component: {fileID: 299024874}
   m_Layer: 0
   m_Name: Pistola
   m_TagString: Untagged
@@ -195,7 +196,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -286,6 +287,22 @@ Transform:
   - {fileID: 909535648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.304, y: 0, z: 0}
+--- !u!114 &299024874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299024869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609207010aead214bb4fd8d26ed8e5bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arma
+  Pistola: {fileID: 299024870}
+  Bala: {fileID: 1102095224341169781, guid: eb2105f47ba80d447870d0c8f03c212c, type: 3}
+  "Ca\xF1on": {fileID: 909535648}
+  Equipada: 1
 --- !u!1 &909535647
 GameObject:
   m_ObjectHideFlags: 0

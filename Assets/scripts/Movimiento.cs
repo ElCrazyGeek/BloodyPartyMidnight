@@ -1,4 +1,3 @@
-using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,5 +26,25 @@ public class Movimiento : MonoBehaviour
         mov.y = dir.y;
 
         Player.linearVelocity = new Vector2(mov.x, mov.y);
+
+        DisparoJugador();
     }
+
+    void DisparoJugador()
+    {
+        if (input.actions["Disparo"].WasPressedThisFrame())
+        {
+            
+            if (Arma.instance.Equipada == true)
+            {
+                Arma.instance.Disparo();
+            }
+        }
+    }
+   void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
+
+
 }
