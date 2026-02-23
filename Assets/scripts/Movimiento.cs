@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +41,7 @@ public class Movimiento : MonoBehaviour
         Player.linearVelocity = new Vector2(mov.x, mov.y);
 
         DisparoJugador();
+        RecogerArma();
     }
 
     void DisparoJugador()
@@ -53,14 +55,44 @@ public class Movimiento : MonoBehaviour
             }
         }
     }
+
+    void RecogerArma()
+    {
+        if (input.actions["Recoger objeto"].WasPressedThisFrame() && ArmaRecoletable )
+        {
+            ArmaEquipada(ArmaRecoletable);
+        }
+    }
+
+    
    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (input.actions["Recoger objeto"].WasPressedThisFrame())
-        {
+     
             if (collision.CompareTag("Arma"))
             {
                 ArmaRecoletable = collision.GetComponent<Arma>(); 
             }
+    }
+
+    public void ArmaEquipada(Arma nuevaArma)
+    {
+        ArmaJugador = nuevaArma;
+        ArmaJugador.Equipada = true;
+        ArmaJugador.transform.SetParent(this.transform);
+
+        ArmaJugador.transform.localPosition = new Vector2(0.5f,0);
+        ArmaJugador.transform.localRotation = Quaternion.identity;
+
+        if (ArmaJugador.GetComponent<Rigidbody2D>())
+        {
+            ArmaJugador.GetComponent<Rigidbody2D>().simulated = false;
+        }
+    }
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Arma"))
+        {
+            ArmaRecoletable = null;
         }
     }
 

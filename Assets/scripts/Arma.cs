@@ -20,9 +20,7 @@ public class Arma : MonoBehaviour
     }
     public void Disparo()
     {
-        // Instanciamos la bala en la posición y rotación del cañón
         Instantiate(Bala, Cañon.position, Cañon.rotation);
         
-        Debug.Log("¡Pum! Bala instanciada.");
     }
 }
