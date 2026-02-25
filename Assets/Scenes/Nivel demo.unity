@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 305299362}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: suelo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -531,6 +531,8 @@ MonoBehaviour:
   dir: {x: 0, y: 0}
   input: {x: 0, y: 0}
   LookRight: 0
+  canJump: 0
+  JumpForce: 10
 --- !u!114 &1898353271
 MonoBehaviour:
   m_ObjectHideFlags: 0

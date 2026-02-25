@@ -36,14 +36,9 @@ public class warrior : MonoBehaviour
 
          input = PInput.actions["Caminata"].ReadValue<Vector2>() * speed;
        dir.x = input.x * speed;
+        dir.y = input.y * JumpForce;
 
-       RBPlayer.linearVelocity = new Vector2(dir.x, RBPlayer.linearVelocity.y);  
-
-
-        input = PInput.actions["Salto"].ReadValue<Vector2>();
-       dir.y = input.y * JumpForce;
-
-       RBPlayer.linearVelocity = new Vector2(RBPlayer.linearVelocity.x, dir.y);  
+       RBPlayer.linearVelocity = new Vector2(dir.x, RBPlayer.linearVelocity.y);    
 
 
         if (RBPlayer.linearVelocity.x > 0)
@@ -77,7 +72,12 @@ public class warrior : MonoBehaviour
             Walk.SetBool("Is Mooving",false);
         }
 
-        if()
+        if(PInput.actions["Salto"].WasPressedThisFrame() && canJump)
+        {
+            RBPlayer.linearVelocity = new Vector2(RBPlayer.linearVelocity.x,JumpForce);
+            canJump = false;
+            Walk.SetBool("IsJumping", true);
+        }
 
 
 
@@ -107,5 +107,13 @@ public class warrior : MonoBehaviour
         Walk.SetBool("Ataque", false);
     }
 
-    
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("suelo")){
+        canJump = true;
+         Walk.SetBool("IsJumping", false);
+        }
+    }
+
+
 }
