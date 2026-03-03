@@ -1,24 +1,42 @@
-
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class warrior : MonoBehaviour
 {
 
-    public Animator Walk;
+    public const string PlayerIdle  = "Idle"; 
+    public const string Playerwalk = "Correr";
+    public const string Playerjump = "Salto"; 
+    public const string PlayerAttack = "Atacar";
+    public const string Playerdead = "MUERTE";
+    private string currentState;
+
+    public Animator aniPlayer;
     public PlayerInput PInput; 
     public Rigidbody2D RBPlayer;
 
     public float speed = 2;
+    public float JumpForce = 5;
 
     public Vector2 dir;
     public Vector2 input;
 
     public bool LookRight;
-
     public bool canJump;
 
-    public float JumpForce = 5;
+    public bool isMoving;
+    public bool isIdle;
+    public bool isGround;
+    public bool isAttacking;
+    public bool IsJumping;
+
+    public Vector2 checkGround;
+
+    public Transform Checador_de_Piso;
+    public float groundDistance;
+    public LayerMask groundMask;
+
 
 
 
@@ -34,11 +52,27 @@ public class warrior : MonoBehaviour
     void Update()
     {
 
+        isGround = Physics2D.Raycast(Checador_de_Piso.position, Vector2.down, groundDistance, groundMask);
+        
+        
+        if(!isAttacking){
+
          input = PInput.actions["Caminata"].ReadValue<Vector2>() * speed;
        dir.x = input.x * speed;
         dir.y = input.y * JumpForce;
+        RBPlayer.linearVelocity = new Vector2(dir.x, RBPlayer.linearVelocity.y);
+        }
+      
+        
+        if(RBPlayer.linearVelocity.x != 0)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
 
-       RBPlayer.linearVelocity = new Vector2(dir.x, RBPlayer.linearVelocity.y);    
 
 
         if (RBPlayer.linearVelocity.x > 0)
@@ -59,61 +93,74 @@ public class warrior : MonoBehaviour
             transform.localScale = new Vector2(-1, transform.localScale.y);
         }
 
-
-
-   
-
-        if (RBPlayer.linearVelocity.x != 0)
-        {
-            Walk.SetBool("Is Mooving", true);
-        }
-        else
-        {
-            Walk.SetBool("Is Mooving",false);
-        }
-
-        if(PInput.actions["Salto"].WasPressedThisFrame() && canJump)
+        if(PInput.actions["Salto"].WasPressedThisFrame() && isGround)
         {
             RBPlayer.linearVelocity = new Vector2(RBPlayer.linearVelocity.x,JumpForce);
-            canJump = false;
-            Walk.SetBool("IsJumping", true);
+            IsJumping = true;
         }
 
-
-
-/*
-        if (Input.GetKeyDown(KeyCode.D))
+         if (isGround)
         {
-            Walk.SetBool("Is Mooving", true);
+           
+            if(PInput.actions["Ataque"].WasPressedThisFrame() && !isAttacking)
+            {
+                isAttacking = true;
+                RBPlayer.linearVelocity = Vector2.zero;
+                IsJumping = false;
+            }
+        }
+        Animation();
+    }
 
+    public void Animation()
+    {
+        if(isGround){
+
+       if (isMoving)
+            {
+                ChangeAnimation(Playerwalk);
+            }
+            else if (isAttacking)
+            {
+                ChangeAnimation(PlayerAttack);
+            }
+            
+            else
+            {
+                ChangeAnimation(PlayerIdle);
+            }
             
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+
+        else{
+
+        if (IsJumping)
         {
-            Walk.SetBool("Is Mooving", false);
-
+            ChangeAnimation(Playerjump);
         }
-*/
-
-         if (Input.GetKeyDown(KeyCode.F))
-        {
-            Walk.SetBool("Ataque", true);
         }
     }
 
-    public void finishiAttack()
+
+    public void ChangeAnimation(string newState)
     {
-        Walk.SetBool("Ataque", false);
+        if(newState == currentState) return;
+        currentState = newState;
+        aniPlayer.Play(currentState);
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void FinishAttack()
     {
-        if(collision.gameObject.CompareTag("suelo")){
-        canJump = true;
-         Walk.SetBool("IsJumping", false);
-        }
+        isAttacking = false;
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(Checador_de_Piso.position, Vector2.down * groundDistance);
+    }
+} 
 
-}
+
+

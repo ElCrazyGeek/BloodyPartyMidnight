@@ -45,6 +45,7 @@ public class movimiento : MonoBehaviour
             player.gravityScale = 1f;
             playertrans.localScale = new Vector3(0.3f, 0.2f,1);
             SR.color = playercolor;
+            
 
        //     SpriteRenderer 
 
