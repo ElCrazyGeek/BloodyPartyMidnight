@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class Volador : MonoBehaviour
 {
+    public const string Volando = "Vuelo";
+    public const string MuerteVolador = "Muerte";
     public Rigidbody2D rbEnemy;
     public float speed;
     public Transform[] patrolPoint;
     private int puntoActual;
-
     public bool isMoving;
     public int contadorDescansos;
     private Vector2[] posiciones;
 
     public bool wasDamagedColor;
     public SpriteRenderer Sprite;
+
+    public bool vivo = true;
+
+    public int vida = 20;
+    public bool muerto;
+    private string currentState;
+    public Animator aniVolador;
    
     void Start()
     {
@@ -22,6 +30,7 @@ public class Volador : MonoBehaviour
         {
             tilin.parent = null;
         }
+        vivo = true;
     }
 
   
@@ -30,7 +39,8 @@ public class Volador : MonoBehaviour
         Transform target = patrolPoint[puntoActual];
 
         Vector2 direction = (target.position - transform.position).normalized;
-
+        if(vivo){ 
+            ChangeAnimation(Volando);
         if (isMoving)
         {
             rbEnemy.linearVelocity = direction * speed;
@@ -64,6 +74,8 @@ public class Volador : MonoBehaviour
                 StartCoroutine(CooldownEspera());
             }
         }
+        }
+        
     }
 
     
@@ -94,7 +106,35 @@ public class Volador : MonoBehaviour
             {
                 StartCoroutine(Damage_Rotine());
             }
+            vida -= 5;
         }
+
+        if(vida <= 0)
+        {
+            vivo = false; 
+            muerto = true;
+        }
+
+        if (!vivo)
+        {
+            speed = 0;
+            muerte();
+        }
+    }
+
+
+    void muerte()
+    {
+        ChangeAnimation(MuerteVolador);
+        Destroy(gameObject,1.5F);
+        
+    }
+
+     public void ChangeAnimation(string newState)
+    {
+        if(newState == currentState) return;
+        currentState = newState;
+        aniVolador.Play(currentState);
     }
 
 }

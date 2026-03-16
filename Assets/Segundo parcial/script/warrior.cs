@@ -141,6 +141,16 @@ public class warrior : MonoBehaviour
         }
         }
     }
+    public void OnTriggerEnter2D(Collider2D collision)
+{
+    DineroBolsa reward = collision.gameObject.GetComponent<DineroBolsa>();
+
+    if (reward != null)
+    {
+        Dineromanager.instance.obtenerDinero(reward.dinero);
+        Destroy(collision.gameObject);
+    }
+}
 
 
     public void ChangeAnimation(string newState)

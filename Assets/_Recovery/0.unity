@@ -436,12 +436,8 @@ MonoBehaviour:
   isRight: 0
   vivo: 1
   vida: 20
-  muerto: 0
-  aniEsqueleto: {fileID: 299317742}
   wasDamagedColor: 0
   Sprite: {fileID: 299317743}
-  recompensa: {fileID: 5919352023304580569, guid: 711005ee89303ee479b9164591754a7d, type: 3}
-  spawnPoint: {fileID: 1637177798}
 --- !u!95 &299317742
 Animator:
   serializedVersion: 7
@@ -538,7 +534,6 @@ Transform:
   m_Children:
   - {fileID: 1957961580}
   - {fileID: 1295506417}
-  - {fileID: 1637177798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &305299360
@@ -692,9 +687,8 @@ GameObject:
   - component: {fileID: 511439810}
   - component: {fileID: 511439809}
   - component: {fileID: 511439808}
-  - component: {fileID: 511439813}
   m_Layer: 0
-  m_Name: Volador
+  m_Name: Enemigo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +702,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511439807}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -726,7 +720,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &511439809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,11 +743,7 @@ MonoBehaviour:
   isMoving: 1
   contadorDescansos: 0
   wasDamagedColor: 0
-  Sprite: {fileID: 511439811}
-  vivo: 1
-  vida: 5
-  muerto: 0
-  aniVolador: {fileID: 511439810}
+  Sprite: {fileID: 0}
 --- !u!95 &511439810
 Animator:
   serializedVersion: 7
@@ -854,42 +844,6 @@ Transform:
   - {fileID: 1239714687}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &511439813
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511439807}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.088311255, y: 0}
-  m_Radius: 0.31666702
 --- !u!1 &613514188
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,13 +944,12 @@ MonoBehaviour:
   - {fileID: 613514189}
   - {fileID: 261599913}
   - {fileID: 856211643}
-  isMoving: 1
-  contadorDescansos: 1
+  isMooving: 1
+  contadorDescansos: 4
   speed: 3
+  isRight: 0
+  wasDamagedColor: 1
   Sprite: {fileID: 1094036087}
-  aniGoblin: {fileID: 1094036086}
-  vivo: 1
-  vida: 10
 --- !u!70 &1094036084
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1027,12 +980,12 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.02045083, y: -0.13335574}
-  m_Size: {x: 0.21842527, y: 0.77144647}
+  m_Offset: {x: 0.02045083, y: -0.006816864}
+  m_Size: {x: 0.21842527, y: 0.5183687}
   m_Direction: 0
 --- !u!50 &1094036085
 Rigidbody2D:
@@ -1042,14 +995,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094036082}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1151,58 +1104,13 @@ Transform:
   m_GameObject: {fileID: 1094036082}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.21, y: -3.2, z: 0}
+  m_LocalPosition: {x: -3.7878342, y: -2.3927305, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 856211643}
   - {fileID: 261599913}
   - {fileID: 613514189}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1194739278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1194739280}
-  - component: {fileID: 1194739279}
-  m_Layer: 0
-  m_Name: Dinero manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1194739279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194739278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1998ccc643bca324a9f69a572c48ef47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dineromanager
-  dineroTotal: 0
---- !u!4 &1194739280
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194739278}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4147, y: -0.9702, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239714685
@@ -1718,42 +1626,11 @@ Transform:
   m_GameObject: {fileID: 1558566110}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.01, y: -2.55, z: 0}
+  m_LocalPosition: {x: 0.19000003, y: -2.6100001, z: 0}
   m_LocalScale: {x: 0.50502, y: 0.50502, z: 0.50502}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 511439812}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1637177797
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1637177798}
-  m_Layer: 0
-  m_Name: spawnPoint esqueleto
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1637177798
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637177797}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.118, y: 0.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 299317744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1898353266
 GameObject:
@@ -2149,4 +2026,3 @@ SceneRoots:
   - {fileID: 511439812}
   - {fileID: 299317744}
   - {fileID: 1094036088}
-  - {fileID: 1194739280}

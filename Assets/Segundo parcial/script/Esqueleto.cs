@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
+    public const string CaminataEsqueleto = "enemigo caminata";
+     public const string MuerteEsqueleto = "Muerte ESQ";
     public Transform rightPoint;
     public Transform leftPoint;
   
@@ -13,11 +16,16 @@ public class Skeleton : MonoBehaviour
     public bool vivo = true;
 
     public int vida = 20;
+    public bool muerto;
+    private string currentState;
+    public Animator aniEsqueleto;
 
     private Vector2 leftDir;
     private Vector2 rightDir;
      public bool wasDamagedColor;
     public SpriteRenderer Sprite;
+    public GameObject recompensa;
+    public Transform spawnPoint;
 
     void Start()
     {
@@ -54,9 +62,7 @@ public class Skeleton : MonoBehaviour
         {
             rbEnemy.linearVelocity = new Vector2(-speed, rbEnemy.linearVelocity.y);
             transform.localScale = new Vector2(-1, transform.localScale.y);
-        }
-
-         
+        }        
     }
         IEnumerator Damage_Rotine()
     {
@@ -70,31 +76,49 @@ public class Skeleton : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
+{
+    if (!vivo) return;
+
+    if (collision.gameObject.CompareTag("sword"))
     {
-        if (collision.gameObject.CompareTag("sword"))
+        if (!wasDamagedColor)
         {
-            if (!wasDamagedColor)
-            {
-                StartCoroutine(Damage_Rotine());
-            }
-            vida -= 5;
+            StartCoroutine(Damage_Rotine());
         }
 
-        if(vida <= 0)
-        {
-            vivo = false; 
-        }
+        vida -= 5;
 
-        if (!vivo)
+        if (vida <= 0)
         {
-            speed = 0;
-            MuerteCooldown();
+            morir();
         }
     }
+}
 
-    IEnumerator MuerteCooldown()
+void morir()
+{
+    vivo = false;
+    muerto = true;
+
+    Instantiate(recompensa, spawnPoint.position, Quaternion.identity);
+
+    speed = 0;
+    muerte();
+}
+
+
+    void muerte()
     {
-        yield return new WaitForSeconds (2f);
-        Destroy(gameObject);
+        ChangeAnimation(MuerteEsqueleto);
+        Destroy(gameObject,1.5F);
+        
+    }
+    
+
+   public void ChangeAnimation(string newState)
+    {
+        if(newState == currentState) return;
+        currentState = newState;
+        aniEsqueleto.Play(currentState);
     }
 }
