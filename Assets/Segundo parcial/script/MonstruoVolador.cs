@@ -23,6 +23,9 @@ public class Volador : MonoBehaviour
     public bool muerto;
     private string currentState;
     public Animator aniVolador;
+
+    public GameObject recompensa;
+    public Transform spawnPoint;
    
     void Start()
     {
@@ -109,14 +112,16 @@ public class Volador : MonoBehaviour
             vida -= 5;
         }
 
-        if(vida <= 0)
+        if(vida <= 0 && vivo)
         {
             vivo = false; 
             muerto = true;
+            Instantiate(recompensa, spawnPoint.position, Quaternion.identity);
         }
 
         if (!vivo)
         {
+            
             speed = 0;
             muerte();
         }
@@ -125,6 +130,7 @@ public class Volador : MonoBehaviour
 
     void muerte()
     {
+
         ChangeAnimation(MuerteVolador);
         Destroy(gameObject,1.5F);
         

@@ -754,6 +754,8 @@ MonoBehaviour:
   vida: 5
   muerto: 0
   aniVolador: {fileID: 511439810}
+  recompensa: {fileID: 5919352023304580569, guid: e256316ccf2096049898cef609124a98, type: 3}
+  spawnPoint: {fileID: 860240407}
 --- !u!95 &511439810
 Animator:
   serializedVersion: 7
@@ -852,6 +854,7 @@ Transform:
   - {fileID: 67476509}
   - {fileID: 1558566112}
   - {fileID: 1239714687}
+  - {fileID: 860240407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &511439813
@@ -952,6 +955,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1094036088}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &860240406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 860240407}
+  m_Layer: 0
+  m_Name: spawnPoint Volador
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &860240407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860240406}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.07, y: -0.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 511439812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1037861120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1037861121}
+  m_Layer: 0
+  m_Name: spawnPoint goblin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1037861121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037861120}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.02, y: -0.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1094036088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1094036082
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +1062,8 @@ MonoBehaviour:
   aniGoblin: {fileID: 1094036086}
   vivo: 1
   vida: 10
+  recompensa: {fileID: 5919352023304580569, guid: a80459cc9e940c64b9826e7369f8fc83, type: 3}
+  spawnPoint: {fileID: 1037861121}
 --- !u!70 &1094036084
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1158,6 +1225,7 @@ Transform:
   - {fileID: 856211643}
   - {fileID: 261599913}
   - {fileID: 613514189}
+  - {fileID: 1037861121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194739278

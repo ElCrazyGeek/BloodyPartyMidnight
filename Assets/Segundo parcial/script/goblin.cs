@@ -24,6 +24,9 @@ public class goblin : MonoBehaviour
     public int vida = 10;
      private int puntoActual;
 
+    public GameObject recompensa;
+    public Transform spawnPoint;
+
     void Start()
     {
         foreach(Transform p in PatrolPoint) { 
@@ -105,6 +108,7 @@ public class goblin : MonoBehaviour
     void Morir()
     {
         vivo = false;
+         Instantiate(recompensa, spawnPoint.position, Quaternion.identity);
         if (GetComponent<Collider2D>()) GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1.5f);
     }
