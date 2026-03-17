@@ -57,11 +57,15 @@ public class warrior : MonoBehaviour
         
         if(!isAttacking){
 
-         input = PInput.actions["Caminata"].ReadValue<Vector2>() * speed;
-       dir.x = input.x * speed;
+         input = PInput.actions["Caminata"].ReadValue<Vector2>();
+        dir.x = input.x * speed;
         dir.y = input.y * JumpForce;
+
         RBPlayer.linearVelocity = new Vector2(dir.x, RBPlayer.linearVelocity.y);
         }
+        else{
+            RBPlayer.linearVelocity = new Vector2(0, RBPlayer.linearVelocity.y);
+            }
       
         
         if(RBPlayer.linearVelocity.x != 0)
@@ -93,6 +97,11 @@ public class warrior : MonoBehaviour
             transform.localScale = new Vector2(-1, transform.localScale.y);
         }
 
+        if (isGround)
+        {
+            IsJumping = false;
+        }
+
         if(PInput.actions["Salto"].WasPressedThisFrame() && isGround)
         {
             RBPlayer.linearVelocity = new Vector2(RBPlayer.linearVelocity.x,JumpForce);
@@ -109,6 +118,7 @@ public class warrior : MonoBehaviour
                 IsJumping = false;
             }
         }
+      
         Animation();
     }
 
@@ -127,8 +137,10 @@ public class warrior : MonoBehaviour
             
             else
             {
-                ChangeAnimation(PlayerIdle);
+                isIdle = true;
+            ChangeAnimation(PlayerIdle);
             }
+            
             
         }
 
