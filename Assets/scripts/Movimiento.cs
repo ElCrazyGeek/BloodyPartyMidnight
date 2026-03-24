@@ -1,6 +1,9 @@
+using System;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class Movimiento : MonoBehaviour
 {  
@@ -23,6 +26,8 @@ public class Movimiento : MonoBehaviour
     [Header("Vaiables Arma")]
     public Arma ArmaJugador;
     public Arma ArmaRecoletable;
+    
+    public GameObject pivote;
 
 
 
@@ -34,6 +39,10 @@ public class Movimiento : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direccion = mouse - transform.position;
+        float angulo = Mathf.Atan2(direccion.y,direccion.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f,0f,angulo);
         dir = input.actions["Movimiento"].ReadValue<Vector2>() * speed;
         mov.x = dir.x; 
         mov.y = dir.y;
@@ -78,10 +87,10 @@ public class Movimiento : MonoBehaviour
     {
         ArmaJugador = nuevaArma;
         ArmaJugador.Equipada = true;
-        ArmaJugador.transform.SetParent(this.transform);
+        ArmaJugador.transform.SetParent(pivote.transform);
 
-        ArmaJugador.transform.localPosition = new Vector2(0.5f,0.5f);
-        ArmaJugador.transform.localRotation = Quaternion.identity;
+        ArmaJugador.transform.localPosition = pivote.transform.localPosition;
+        ArmaJugador.transform.localRotation = transform.rotation;
 
         if (ArmaJugador.GetComponent<Rigidbody2D>())
         {
