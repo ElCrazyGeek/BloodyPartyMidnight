@@ -90,7 +90,7 @@ public class Movimiento : MonoBehaviour
         ArmaJugador.transform.SetParent(pivote.transform);
 
         ArmaJugador.transform.localPosition = pivote.transform.localPosition;
-        ArmaJugador.transform.localRotation = transform.rotation;
+        ArmaJugador.transform.rotation = transform.rotation;
 
         if (ArmaJugador.GetComponent<Rigidbody2D>())
         {

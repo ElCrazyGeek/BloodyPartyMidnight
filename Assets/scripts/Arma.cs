@@ -12,7 +12,7 @@ public class Arma : MonoBehaviour
 
     public Boolean Equipada;
 
-    public int municion = 5;
+    public int municion;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
