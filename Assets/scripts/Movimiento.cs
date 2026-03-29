@@ -89,8 +89,8 @@ public class Movimiento : MonoBehaviour
         ArmaJugador.Equipada = true;
         ArmaJugador.transform.SetParent(pivote.transform);
 
-        ArmaJugador.transform.localPosition = pivote.transform.localPosition;
-        ArmaJugador.transform.rotation = transform.rotation;
+        ArmaJugador.transform.localPosition = Vector3.zero;
+        ArmaJugador.transform.localRotation = Quaternion.Euler(0, 0, 90);
 
         if (ArmaJugador.GetComponent<Rigidbody2D>())
         {
