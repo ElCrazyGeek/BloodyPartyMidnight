@@ -18,6 +18,7 @@ public class Movimiento : MonoBehaviour
     public Vector2 mov;
     public PlayerInput input; 
     public float speed;
+    public float vida = 20;
     /// <summary>
     /// aqui van ir los valores del arma cuando sean necesarios
     /// mas que nada solo que el jugador la pueda tomar o no, y lo demas
@@ -103,6 +104,10 @@ public class Movimiento : MonoBehaviour
         {
             ArmaRecoletable = null;
         }
+    }
+    void Morir() {
+    GameManager.instance.JugadorMurio();
+    // Desactivar movimiento del jugador, etc.
     }
 
 

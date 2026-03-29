@@ -100,13 +100,13 @@ else
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+  /*  public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Golpe"))
         {
             RecibirDaño(5);
         }
-    }
+    }*/
 
     void Patrulla()
 {
