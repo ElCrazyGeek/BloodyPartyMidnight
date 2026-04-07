@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bala : MonoBehaviour
 {
-    public float fuerza;
+    public float fuerza = 35;
     public Rigidbody2D bala;
     
   
@@ -29,6 +29,17 @@ public class Bala : MonoBehaviour
         {
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
+        }
+        
+       if (collision.gameObject.CompareTag("Muro"))
+        {
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("MuroDes"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 
