@@ -169,5 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5e1c182ff94c84496f8053df600e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bala
-  fuerza: 5
+  fuerza: 22
   bala: {fileID: 6805448540861122261}
