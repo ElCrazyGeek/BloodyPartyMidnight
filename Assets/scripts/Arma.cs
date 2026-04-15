@@ -37,13 +37,15 @@ public class Arma : MonoBehaviour
     // --- NUEVA FUNCIÓN DE LANZAMIENTO ---
     public void LanzarArma()
     {
-        if (!Equipada) return;
+       
+    if (!Equipada) return;
 
-        // 1. Liberamos el arma (deja de ser hija del jugador)
         Equipada = false;
         transform.parent = null; 
-
-        // 2. Activamos la física para que vuele
+     // 1. Liberamos el arma (deja de ser hija del jugador)
+    // IMPORTANTE: Dejamos de ser Trigger para poder chocar con muros
+        GetComponent<Collider2D>().isTrigger = false; 
+    // 2. Activamos la física para que vuele
         rbPistola.bodyType = RigidbodyType2D.Dynamic;
         rbPistola.simulated = true;
 
@@ -72,23 +74,42 @@ public class Arma : MonoBehaviour
     
 
     // Detectar si el arma lanzada golpea a un enemigo
-    private void OnCollisionEnter2D(Collision2D collision)
+private void OnCollisionEnter2D(Collision2D collision)
+{
+    if (Equipada) return;
+
+    // 1. Lógica de rebote en Muros
+    if (collision.gameObject.layer == LayerMask.NameToLayer("Muro"))
     {
-        // Solo hace daño si NO está equipada (es decir, va volando)
-        if (!Equipada && collision.gameObject.CompareTag("Enemigo"))
-        {
-            // Accedemos al script del enemigo que ya tienes
-            Enemigo scriptEnemigo = collision.gameObject.GetComponent<Enemigo>();
-            if(scriptEnemigo != null)
-            {
-                scriptEnemigo.RecibirDaño(3); // Daño por impacto de arma
-                Debug.Log("¡Enemigo golpeado por arma lanzada!");
-            }
-            
-            // Al chocar, el arma pierde fuerza y cae
-            rbPistola.angularVelocity = 0;
-        }
+        rbPistola.angularVelocity *= 0.5f;
     }
 
+    // 2. Lógica de daño a Enemigos
+    if (collision.gameObject.CompareTag("Enemigo"))
+    {
+        Enemigo scriptEnemigo = collision.gameObject.GetComponent<Enemigo>();
+        if(scriptEnemigo != null)
+        {
+            scriptEnemigo.RecibirDaño(3);
+            Debug.Log("¡Armazo en la cara!");
+        }
+        rbPistola.angularVelocity *= 0.2f;
+    }
+
+    // 3. ¿Debe detenerse y ser recolectable? 
+    // Es mejor checar esto después de que la física haga lo suyo
+    if (rbPistola.linearVelocity.magnitude < 1.5f) 
+    {
+        GetComponent<Collider2D>().isTrigger = true;
+        // No pongas velocity a cero aquí abruptamente para que el rebote termine natural
+    }
+}
+
+private void FrenarArma()
+{
+    // Reduce la rotación drásticamente al chocar para que se vea pesado
+    rbPistola.angularVelocity = rbPistola.angularVelocity * 0.2f;
+    // Opcional: podrías añadir un pequeño rebote si usas un Physics Material 2D
+}
     
 }

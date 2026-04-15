@@ -49,22 +49,26 @@ public class Movimiento : MonoBehaviour
         mov.y = dir.y;
 
         Player.linearVelocity = new Vector2(mov.x, mov.y);
+        
 
         DisparoJugador();
         RecogerArma();
+        CheckLanzamiento();
+
+        
     }
 
-    void DisparoJugador()
+void DisparoJugador()
+{
+    if (input.actions["Disparo"].WasPressedThisFrame())
     {
-        if (input.actions["Disparo"].WasPressedThisFrame())
+        // Usamos la referencia local del arma que tiene el jugador, NO el static instance
+        if (ArmaJugador != null && ArmaJugador.Equipada)
         {
-            
-            if (Arma.instance.Equipada == true)
-            {
-                Arma.instance.Disparo();
-            }
+            ArmaJugador.Disparo();
         }
     }
+}
 
     void RecogerArma()
     {
@@ -73,6 +77,15 @@ public class Movimiento : MonoBehaviour
             ArmaEquipada(ArmaRecoletable);
         }
     }
+    void CheckLanzamiento()
+{
+    // Usualmente en Hotline Miami se lanza con Click Derecho
+    if (input.actions["Lanzar objeto"].WasPressedThisFrame() && ArmaJugador != null)
+    {
+        ArmaJugador.LanzarArma(); // Ejecuta la lógica física del arma
+        ArmaJugador = null;       // El jugador ya no tiene arma en la mano
+    }
+}
 
     
    void OnTriggerEnter2D(Collider2D collision)
@@ -83,21 +96,29 @@ public class Movimiento : MonoBehaviour
                 ArmaRecoletable = collision.GetComponent<Arma>(); 
             }
     }
-
-    public void ArmaEquipada(Arma nuevaArma)
+    void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Arma"))
     {
-        ArmaJugador = nuevaArma;
-        ArmaJugador.Equipada = true;
-        ArmaJugador.transform.SetParent(pivote.transform);
-
-        ArmaJugador.transform.localPosition = Vector3.zero;
-        ArmaJugador.transform.localRotation = Quaternion.Euler(0, 0, 90);
-
-        if (ArmaJugador.GetComponent<Rigidbody2D>())
-        {
-            ArmaJugador.GetComponent<Rigidbody2D>().simulated = false;
-        }
+        ArmaRecoletable = collision.gameObject.GetComponent<Arma>();
     }
+}
+
+public void ArmaEquipada(Arma nuevaArma)
+{
+    ArmaJugador = nuevaArma;
+    ArmaJugador.Equipada = true;
+    ArmaJugador.transform.SetParent(pivote.transform);
+
+    ArmaJugador.transform.localPosition = Vector3.zero;
+    ArmaJugador.transform.localRotation = Quaternion.Euler(0, 0, 90);
+
+    // Usamos la referencia que ya existe en el arma
+    if (ArmaJugador.rbPistola != null)
+    {
+        ArmaJugador.rbPistola.simulated = false;
+    }
+}
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Arma"))
