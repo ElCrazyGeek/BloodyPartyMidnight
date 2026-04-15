@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI; //para el nav mesh
 
 public class Enemigo : MonoBehaviour
 {
+    public NavMeshAgent agent;
     public Rigidbody2D rbEnemy;
     public float speed;
     public Transform[] PuntosDePatrulla;
@@ -28,62 +30,54 @@ public class Enemigo : MonoBehaviour
 {
     vivo = true;
     isMoving = true;
-
+    
+    agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
+        agent.updateRotation = false; // Evitamos que Unity lo rote en 3D
+        agent.updateUpAxis = false;
+    
     foreach (Transform Ene in PuntosDePatrulla)
     {
         Ene.parent = null;
     }
+    
 }
 
     // Update is called once per frame
 void Update()
-{
-    if (!vivo) return;
+    {
+        if (!vivo) return;
 
-    if (PuedeVerJugador())
-    {
-        persiguiendo = true;
-    }
-    else if (persiguiendo)
-    {
-        // Si lo pierde de vista, lo sigue buscando hasta que se aleje demasiado
-        float distanciaJugador = Vector2.Distance(transform.position, jugador.position);
-        if (distanciaJugador >= rangoPerdida)
+        if (PuedeVerJugador())
         {
-            persiguiendo = false;
+            persiguiendo = true;
         }
+        else if (persiguiendo)
+        {
+            float distanciaJugador = Vector2.Distance(transform.position, jugador.position);
+            if (distanciaJugador >= rangoPerdida)
+            {
+                persiguiendo = false;
+                agent.ResetPath(); // Limpia la ruta al perderlo
+            }
+        }
+
+        if (persiguiendo)
+        {
+            // --- 4. MOVIMIENTO CON NAVMESH ---
+            agent.SetDestination(jugador.position);
+            
+            // Calculamos la dirección para la rotación visual
+            Vector2 direccion = (jugador.position - transform.position).normalized;
+            RotarHacia(direccion);
+        }
+        else
+        {
+            Patrulla();
+        }
+
+        VerificarMuerte();
     }
-
-    if (persiguiendo)
-    {
-        Vector2 direccionJugador = (jugador.position - transform.position).normalized;
-
-RaycastHit2D pared = Physics2D.Raycast(
-    transform.position,
-    direccionJugador,
-    distanciaPared,
-    capaParedes
-);
-
-if (pared.collider == null)
-{
-    rbEnemy.linearVelocity = direccionJugador * speed;
-}
-else
-{
-    rbEnemy.linearVelocity = Vector2.zero;
-}
-
-        // --- MIRA DIRECTO AL JUGADOR ---
-        RotarHacia(direccionJugador);
-    }
-    else
-    {
-        Patrulla();
-    }
-
-    VerificarMuerte();
-}
 
 
     public void RecibirDaño(float cantidad)
@@ -97,6 +91,7 @@ else
             vivo = false;
             isMoving = false;
             rbEnemy.linearVelocity = Vector2.zero;
+            agent.enabled = false;
         }
     }
 
@@ -109,53 +104,43 @@ else
     }*/
 
     void Patrulla()
-{
-    if (PuntosDePatrulla.Length == 0) return;
-
-    Transform target = PuntosDePatrulla[puntoActual];
-    Vector2 direction = (target.position - transform.position).normalized;
-
-    if (isMoving)
     {
-        rbEnemy.linearVelocity = direction * speed;
-        RotarHacia(direction); // Mira hacia el punto de patrulla
-    }
+        if (PuntosDePatrulla.Length == 0 || !isMoving) return;
 
-    if (direction.x > 0)
-    {
-        transform.localScale = new Vector2(1, transform.localScale.y);
-    }
-    else if (direction.x < 0)
-    {
-        transform.localScale = new Vector2(-1, transform.localScale.y);
-    }
+        Transform target = PuntosDePatrulla[puntoActual];
+        
+        // --- 5. PATRULLA CON NAVMESH ---
+        agent.SetDestination(target.position);
 
-    if (Vector2.Distance(transform.position, target.position) <= 0.1f)
-    {
-        puntoActual++;
-        contadorDescansos++;
-
-        if (puntoActual >= PuntosDePatrulla.Length)
+        // Rotación visual basada en la velocidad actual del agente
+        if (agent.velocity.magnitude > 0.1f)
         {
-            puntoActual = 0;
+            RotarHacia(agent.velocity.normalized);
         }
 
-        if (contadorDescansos >= 3)
+        // Detectar si llegó al punto
+        if (!agent.pathPending && agent.remainingDistance <= 0.2f)
         {
-            StartCoroutine(Espera());
+            puntoActual = (puntoActual + 1) % PuntosDePatrulla.Length;
+            contadorDescansos++;
+
+            if (contadorDescansos >= 3)
+            {
+                StartCoroutine(Espera());
+            }
         }
     }
-}
 
 
         IEnumerator Espera()
     {
         isMoving = false;
-
+        agent.isStopped = true;
         yield return new WaitForSeconds(1f);
 
         contadorDescansos = 0;
         isMoving = true;
+        agent.isStopped = false;
     }
    bool PuedeVerJugador()
 {
