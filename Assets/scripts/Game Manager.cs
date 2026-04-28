@@ -27,12 +27,6 @@ public class GameManager : MonoBehaviour
             ReiniciarNivel();
         }
 
-        // Bonus: Cerrar el juego con Escape
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-            Debug.Log("Saliendo del juego...");
-        }
     }
 
     public void ReiniciarNivel()

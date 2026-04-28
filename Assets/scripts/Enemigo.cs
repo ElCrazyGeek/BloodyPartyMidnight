@@ -48,6 +48,16 @@ void Update()
     {
         if (!vivo) return;
 
+        // esto es para que el agente regrese al navmesh 
+        if (agent.enabled && !agent.isOnNavMesh)
+    {
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            agent.Warp(hit.position);
+        }
+    }
+
         if (PuedeVerJugador())
         {
             persiguiendo = true;
@@ -70,6 +80,8 @@ void Update()
             // Calculamos la dirección para la rotación visual
             Vector2 direccion = (jugador.position - transform.position).normalized;
             RotarHacia(direccion);
+            
+
         }
         else
         {
@@ -131,6 +143,14 @@ void Update()
         }
     }
 
+  /*  void ataque()
+    {
+        if(CompareTag)
+            {
+                
+            }
+    }
+*/
 
         IEnumerator Espera()
     {
