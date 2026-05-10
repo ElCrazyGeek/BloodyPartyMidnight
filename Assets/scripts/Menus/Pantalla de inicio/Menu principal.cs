@@ -18,8 +18,10 @@ public class Menuprincipal : MonoBehaviour
     public CanvasGroup CGActivo;
 
     [Header("Botones de fondo")]
+    public Button Opcionizquierda;
     public TextMeshProUGUI TextoIzquierdo;
     public CanvasGroup CGIzquierdo;
+    public Button OpcionDerecha;
     public TextMeshProUGUI TextoDerecho;
     public CanvasGroup CGDerecho;   
     
@@ -36,13 +38,15 @@ public class Menuprincipal : MonoBehaviour
     {
         Izquierda.onClick.AddListener(Anterior);
         Derecha.onClick.AddListener(Siguiente);
+        OpcionDerecha.onClick.AddListener(Siguiente);
+        Opcionizquierda.onClick.AddListener(Anterior);
         
         CGIzquierdo.alpha = 0.4f;
         CGDerecho.alpha = 0.4f;
         CGActivo.alpha = 1f;
 
-        TextoIzquierdo.transform.localScale = Vector3.one * escalaFantasma;
-        TextoDerecho.transform.localScale = Vector3.one * escalaFantasma;
+        Opcionizquierda.transform.localScale = Vector3.one * escalaFantasma;
+        OpcionDerecha.transform.localScale = Vector3.one * escalaFantasma;
 
         ActualizarTexto();
     }
@@ -70,41 +74,33 @@ public class Menuprincipal : MonoBehaviour
 
     void AnimarCambio()
     {
-         CGActivo.DOFade(0f, duracionFade);
+        // Boton activo: fade out + scale down
+        CGActivo.DOFade(0f, duracionFade);
         Activo.transform.DOScale(0.85f, duracionFade).OnComplete(() =>
         {
             ActualizarTexto();
 
-            // Glitch: offset rapido en X antes del fade in
+            // Glitch
             RectTransform rt = Activo.GetComponent<RectTransform>();
             rt.anchoredPosition += new Vector2(glitchOffset, 0f);
             rt.DOAnchorPosX(rt.anchoredPosition.x - glitchOffset, 0.05f).OnComplete(() =>
             {
- 
                 CGActivo.DOFade(1f, duracionFade);
                 Activo.transform.DOScale(1f, duracionFade);
             });
         });
 
-        // --- Fantasmas: fade out + scale down luego fade in ---
+        // Fantasma izquierdo
         CGIzquierdo.DOFade(0f, duracionFade).OnComplete(() =>
-        {
-            CGIzquierdo.DOFade(0.4f, duracionFade);
-        });
-        TextoIzquierdo.transform.DOScale(0.8f, duracionFade).OnComplete(() =>
-        {
-            TextoIzquierdo.transform.DOScale(escalaFantasma, duracionFade);
-        });
+            CGIzquierdo.DOFade(0.4f, duracionFade));
+        Opcionizquierda.transform.DOScale(0.8f,duracionFade).OnComplete(() =>
+        Opcionizquierda.transform.DOScale(escalaFantasma,duracionFade));
 
+        // Fantasma derecho
         CGDerecho.DOFade(0f, duracionFade).OnComplete(() =>
-        {
-            CGDerecho.DOFade(0.4f, duracionFade);
-        });
-        TextoDerecho.transform.DOScale(0.8f, duracionFade).OnComplete(() =>
-        {
-            TextoDerecho.transform.DOScale(escalaFantasma, duracionFade);
-        });
-    
+            CGDerecho.DOFade(0.4f, duracionFade));
+        OpcionDerecha.transform.DOScale(0.8f, duracionFade).OnComplete(() =>
+            OpcionDerecha.transform.DOScale(escalaFantasma, duracionFade));
     }
 
     void ActualizarTexto()
