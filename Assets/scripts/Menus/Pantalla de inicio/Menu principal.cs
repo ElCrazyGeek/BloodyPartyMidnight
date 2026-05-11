@@ -34,6 +34,9 @@ public class Menuprincipal : MonoBehaviour
     public float duracionFade = 0.15f;
     public float escalaFantasma = 0.85f;
     public float glitchOffset = 4f;
+
+    [Header("Panel Opciones")]
+public GameObject panelOpciones;
     void Start()
     {
         Izquierda.onClick.AddListener(Anterior);
@@ -49,16 +52,23 @@ public class Menuprincipal : MonoBehaviour
         OpcionDerecha.transform.localScale = Vector3.one * escalaFantasma;
 
         ActualizarTexto();
+
+        Activo.onClick.AddListener(() =>
+        {
+        if (opciones[indiceActual] == "Opciones")
+        AbrirOpciones();
+        });
     }
 
     void Update()
 {
-    float scroll = Input.GetAxis("Mouse ScrollWheel");
+    if (Input.GetKeyDown(KeyCode.Escape) && panelOpciones.activeSelf)
+        CerrarOpciones();
     
-    if (scroll > 0f)
-        Anterior();
-    else if (scroll < 0f)
-        Siguiente();
+
+    float scroll = Input.GetAxis("Mouse ScrollWheel");
+    if (scroll > 0f) Anterior();
+    else if (scroll < 0f) Siguiente();
 }
 
     void Siguiente(){
@@ -111,4 +121,15 @@ public class Menuprincipal : MonoBehaviour
         TextoIzquierdo.text = opciones[anterior];
         TextoDerecho.text = opciones[siguiente];
     }
+
+
+    public void AbrirOpciones()
+{
+    panelOpciones.SetActive(true);
+}
+
+public void CerrarOpciones()
+{
+    panelOpciones.SetActive(false);
+}
 }
