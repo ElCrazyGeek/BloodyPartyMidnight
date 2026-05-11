@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
@@ -52,6 +53,13 @@ public GameObject panelOpciones;
         OpcionDerecha.transform.localScale = Vector3.one * escalaFantasma;
 
         ActualizarTexto();
+        Activo.onClick.AddListener(() =>
+        {
+             if (opciones[indiceActual] == "Iniciar partida")
+            SceneManager.LoadScene("Nivel demo");
+            else if (opciones[indiceActual] == "Opciones")
+             AbrirOpciones();
+        });
 
         Activo.onClick.AddListener(() =>
         {
