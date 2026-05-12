@@ -25,6 +25,7 @@ public class Menuprincipal : MonoBehaviour
     public Button OpcionDerecha;
     public TextMeshProUGUI TextoDerecho;
     public CanvasGroup CGDerecho;   
+    public Cerrar_Juego gestorSalida;
     
     [Header("Opciones")]
 
@@ -66,6 +67,17 @@ public GameObject panelOpciones;
         if (opciones[indiceActual] == "Opciones")
         AbrirOpciones();
         });
+
+        Activo.onClick.AddListener(() =>
+        {
+    if (opciones[indiceActual] == "Iniciar partida")
+        SceneManager.LoadScene("Nivel demo");
+    else if (opciones[indiceActual] == "Opciones")
+        AbrirOpciones();
+    else if (opciones[indiceActual] == "Salir del Juego")
+        gestorSalida.AbrirConfirmacion();
+    });
+
     }
 
     void Update()
