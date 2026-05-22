@@ -24,5 +24,9 @@ public class Boton_Activo_menuPrin : MonoBehaviour
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine)
             .From(colorMin);
+
+            
     }
+
+    
 }
